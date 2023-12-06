@@ -31,7 +31,9 @@
 #include <QVideoWidget>
 #include <QSlider>
 #include <QToolButton>
-#include<QMenu>
+#include <QMenu>
+#include <QListWidget>
+#include <QWidgetAction>
 #include "the_player.h"
 #include "the_button.h"
 
@@ -180,7 +182,81 @@ int main(int argc, char *argv[]) {
 
     top->addLayout(controlLayout);
 
+    QSlider *volumeSlider = new QSlider(Qt::Horizontal, &window);
+    volumeSlider->setRange(0, 100);  // 音量范围从 0 到 100
+    volumeSlider->setValue(10);      // 默认音量值设为 50
+    volumeSlider->setFixedSize(200, 30); // 设置滑动条的宽度为 200，高度为 30
+    QObject::connect(volumeSlider, &QSlider::valueChanged, player, &QMediaPlayer::setVolume);
 
+    top->addWidget(volumeSlider);
+
+    QPushButton *replayButton = new QPushButton("Replay", &window);
+
+    // 连接重新播放按钮的点击事件到播放器的槽函数
+    QObject::connect(replayButton, &QPushButton::clicked, [player]() {
+        player->setPosition(0); // 将播放位置重置到起始点
+        player->play();         // 开始播放
+    });
+    top->addWidget(replayButton);
+
+    QPushButton *prevButton = new QPushButton("Previous", &window);
+    QPushButton *nextButton = new QPushButton("Next", &window);
+
+    size_t currentIndex = 0;  // 当前视频索引
+
+    auto playVideo = [&](size_t index) {
+        if (index < videos.size()) {
+            currentIndex = index;
+            TheButtonInfo &info = videos.at(index);
+            player->setMedia(*info.url);
+            player->play();
+        }
+    };
+
+    // 连接按钮的点击事件到槽函数
+    QObject::connect(prevButton, &QPushButton::clicked, [&]() {
+        if (currentIndex > 0) {
+            playVideo(currentIndex - 1);
+        }
+    });
+    QObject::connect(nextButton, &QPushButton::clicked, [&]() {
+        if (currentIndex < videos.size() - 1) {
+            playVideo(currentIndex + 1);
+        }
+    });
+
+
+
+    controlLayout->addWidget(prevButton);
+    controlLayout->addWidget(nextButton);
+    top->addLayout(controlLayout);
+
+    QToolButton *fileMenuButton = new QToolButton(&window);
+    fileMenuButton->setText("Select Video");
+
+    QListWidget *fileList = new QListWidget(&window);
+    for (size_t i = 0; i < videos.size(); ++i) {
+        QListWidgetItem *item = new QListWidgetItem(videos[i].url->fileName(), fileList);
+        item->setData(Qt::UserRole, QVariant::fromValue(*videos[i].url)); // 以值存储
+
+    }
+
+    QObject::connect(fileList, &QListWidget::itemClicked, [player](QListWidgetItem *item) {
+        QUrl url = item->data(Qt::UserRole).value<QUrl>(); // 以值检索
+        player->setMedia(url);
+
+    });
+
+    QWidgetAction *popupAction = new QWidgetAction(fileMenuButton);
+    popupAction->setDefaultWidget(fileList);
+
+    QMenu *popupMenu = new QMenu(fileMenuButton);
+    popupMenu->addAction(popupAction);
+    fileMenuButton->setMenu(popupMenu);
+    fileMenuButton->setPopupMode(QToolButton::InstantPopup);
+
+
+    top->addWidget(fileMenuButton);
     // Show the main window
     window.show();
 
