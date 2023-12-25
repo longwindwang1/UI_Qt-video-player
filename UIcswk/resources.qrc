@@ -12,5 +12,7 @@
         <file>icon/volumeDisable.png</file>
         <file>icon/file.png</file>
         <file>icon/player.png</file>
+        <file>icon/Down.png</file>
+        <file>icon/Up.png</file>
     </qresource>
 </RCC>

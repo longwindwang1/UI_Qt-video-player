@@ -1,10 +1,24 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include <QApplication>
+#include <QStackedWidget>
+#include <QPushButton>
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QScrollArea>
 #include <QFileDialog>
+#include <QProcess>
+#include "videoplayer.h"  // 包含 VideoPlayer 类的头文件
+#include <QtMultimediaWidgets/QVideoWidget>
 #include <QMediaPlayer>
-#include <QVideoWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QHBoxLayout>
+#include <QtCore/QFileInfo>
+#include <QtWidgets/QFileIconProvider>
+#include <QDesktopServices>
+#include <QImageReader>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,8 +31,7 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = nullptr);
-    QList<QUrl> videoUrls;
+    Widget(QWidget *parent = nullptr);
     ~Widget();
 
 private slots:
@@ -26,22 +39,20 @@ private slots:
 
     void on_file_clicked();
 
-    void on_play_clicked();
+    void on_pause_clicked();
 
-    void on_volume_clicked();
-
-    void on_volumeslider_actionTriggered(int action);
-
-    void on_backward_clicked();
-
-    void on_forward_clicked();
-
-    void on_playslider_actionTriggered(int action);
-
+    void on_playerslider_sliderMoved(int position);
+    void on_volumeslider_sliderMoved(int position);
+    void updatePlaySlider(qint64 position);
 
 private:
     Ui::Widget *ui;
-    QMediaPlayer *player;  // 新增播放器实例
+    VideoPlayer *videoPlayer;  // 添加 VideoPlayer 类型的成员变量
+
+    void loadVideoFiles(const QString &folderPath);  // Function to load video files
+    void playVideo(int index);                       // Function to play a video by index
 
 };
 #endif // WIDGET_H
+
+

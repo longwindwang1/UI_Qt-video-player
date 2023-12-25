@@ -1,8 +1,6 @@
-QT       += core gui
+QT += core gui
+QT += multimediawidgets
 QT += multimedia
-QT += multimedia multimediawidgets
-QT += core gui multimedia
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -14,9 +12,11 @@ CONFIG += highdpi
 
 SOURCES += \
     main.cpp \
+    videoplayer.cpp \
     widget.cpp
 
 HEADERS += \
+    videoplayer.h \
     widget.h
 
 FORMS += \
