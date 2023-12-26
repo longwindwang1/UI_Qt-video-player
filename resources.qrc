@@ -1,16 +1,15 @@
 <RCC>
-    <qresource prefix="/new">
-        <file>icon/backward.png</file>
-        <file>icon/forward.png</file>
-        <file>icon/list.png</file>
-        <file>icon/next.png</file>
-        <file>icon/play.png</file>
-        <file>icon/previous.png</file>
-        <file>icon/random.png</file>
-        <file>icon/stop.png</file>
-        <file>icon/volume.png</file>
-        <file>icon/volumeDisable.png</file>
-        <file>icon/file.png</file>
-        <file>icon/player.png</file>
+    <qresource prefix="/">
+        <file>icons/backward.png</file>
+        <file>icons/file.png</file>
+        <file>icons/forward.png</file>
+        <file>icons/play.png</file>
+        <file>icons/stop.png</file>
+        <file>icons/volume.png</file>
+        <file>icons/volumeDisable.png</file>
+        <file>icons/like.png</file>
+        <file>icons/share.png</file>
+        <file>icons/user.png</file>
+        <file>icons/fullscreen.png</file>
     </qresource>
 </RCC>

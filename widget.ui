@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>VideoPlayer</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+background-color: rgb(255, 242, 220);}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -37,17 +41,34 @@
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(250, 179, 255,200), stop:0.5 rgba(170, 85, 255, 200), stop:1 rgba(85, 0, 127, 200))
+        <string notr="true">border:2px solid #000;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: rgba(106, 153, 133, 100);
+    color: white;
 </string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="VedioName">
+         <widget class="QLabel" name="videoname">
+          <property name="font">
+           <font>
+            <pointsize>20</pointsize>
+            <bold>true</bold>
+            <underline>true</underline>
+           </font>
+          </property>
           <property name="styleSheet">
-           <string notr="true">background-color:rgba(250, 179, 255,0)</string>
+           <string notr="true">QLabel {
+
+	border:2px solid #000;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: #e6ab5d;;
+    color: black;
+}
+</string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;Video Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700; color:#000&quot; &gt;Video Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -58,26 +79,68 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
-            <height>20</height>
+            <width>20</width>
+            <height>40</height>
            </size>
           </property>
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="file">
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>50</height>
-           </size>
+         <widget class="QPushButton" name="pushButton">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+
+	border:2px solid #000;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: #e6ab5d;;
+    color: white;
+}
+</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/new/icon/file.png</normaloff>:/new/icon/file.png</iconset>
+            <normaloff>:/icons/user.png</normaloff>:/icons/user.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="file">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	
+   
+	background-color: rgb(106, 153, 133);
+    /* 添加其他样式如边框、文字颜色等 */
+    border: 2px solid #000;
+    color: white;
+border-radius:10px
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/file.png</normaloff>:/icons/file.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -94,67 +157,45 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="playwidget" native="true">
+      <widget class="QWidget" name="videoPlayer" native="true">
        <property name="styleSheet">
-        <string notr="true">background-color:rgba(207, 210, 255, 150)</string>
+        <string notr="true"/>
        </property>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <widget class="QSlider" name="playslider">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QFrame" name="videoFrame">
+          <property name="styleSheet">
+           <string notr="true">border:2px solid #000;
+ border-radius: 10px; /* 设置为宽高的一半 */</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QStackedWidget" name="stackedWidget">
-          <property name="currentIndex">
-           <number>0</number>
+        <item>
+         <widget class="QSlider" name="playerslider">
+          <property name="styleSheet">
+           <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999;
+    height: 8px;
+    background: white; /* 未滑过部分的颜色 */
+}
+
+QSlider::handle:horizontal {
+    background: #5c5c5c;
+    border: 1px solid #5c5c5c;
+    width: 10px;
+    margin: -2px 0; /* 边距用于滑块超出槽的部分 */
+    border-radius: 3px;
+}</string>
           </property>
-          <widget class="QWidget" name="page">
-           <widget class="QTextEdit" name="textEdit_2">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>250</y>
-              <width>104</width>
-              <height>64</height>
-             </rect>
-            </property>
-            <property name="html">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;456456456&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </widget>
-          <widget class="QWidget" name="page_2">
-           <widget class="QTextEdit" name="textEdit">
-            <property name="geometry">
-             <rect>
-              <x>100</x>
-              <y>240</y>
-              <width>104</width>
-              <height>64</height>
-             </rect>
-            </property>
-            <property name="html">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;123123123&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </widget>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
          </widget>
         </item>
        </layout>
@@ -169,7 +210,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">border:2px solid #000;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: rgba(106, 153, 133, 100);
+    color: white;
+</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="leftMargin">
@@ -185,19 +230,31 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <number>6</number>
         </property>
         <item>
-         <widget class="QPushButton" name="playPauseButton">
+         <widget class="QPushButton" name="pause">
           <property name="maximumSize">
            <size>
-            <width>100</width>
-            <height>50</height>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	
+   
+	background-color: rgb(106, 153, 133);
+    /* 添加其他样式如边框、文字颜色等 */
+    border: 2px solid #000;
+    color: white;
+	border-radius:10px
+}
+</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/new/icon/play.png</normaloff>:/new/icon/play.png</iconset>
+            <normaloff>:/icons/play.png</normaloff>:/icons/play.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -214,8 +271,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <widget class="QPushButton" name="volume">
           <property name="maximumSize">
            <size>
-            <width>100</width>
-            <height>50</height>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
           </property>
           <property name="text">
@@ -223,7 +280,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/new/icon/volumeDisable.png</normaloff>:/new/icon/volumeDisable.png</iconset>
+            <normaloff>:/icons/volumeDisable.png</normaloff>:/icons/volumeDisable.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -237,14 +294,37 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </widget>
         </item>
         <item>
-         <widget class="QSlider" name="volumslider">
+         <widget class="QSlider" name="volumeslider">
+          <property name="styleSheet">
+           <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999;
+    height: 8px;
+}
+
+QSlider::handle:horizontal {
+    background: #fffff1;
+    border: 1px solid #5c5c5c;
+    width: 10px;
+    margin: -2px 0; /* 边距用于滑块超出槽的部分 */
+    border-radius: 5px;
+}
+
+QSlider::add-page:horizontal {
+    background:  #ebebeb; /* 滑块之后的颜色 */
+}
+
+QSlider::sub-page:horizontal {
+    background: #e6ab5d; /* 滑块之前的颜色 */
+}
+</string>
+          </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
+         <spacer name="horizontalSpacer_6">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -257,19 +337,160 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="backward">
-          <property name="maximumSize">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>100</width>
-            <height>50</height>
+            <width>40</width>
+            <height>20</height>
            </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="fullscreen">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	
+   
+	background-color: rgb(106, 153, 133);
+    /* 添加其他样式如边框、文字颜色等 */
+    border: 2px solid #000;
+    color: white;
+	border-radius:10px
+}
+</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/new/icon/backward.png</normaloff>:/new/icon/backward.png</iconset>
+            <normaloff>:/icons/fullscreen.png</normaloff>:/icons/fullscreen.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	
+   
+	background-color: rgb(106, 153, 133);
+    /* 添加其他样式如边框、文字颜色等 */
+    border: 2px solid #000;
+    color: white;
+	border-radius:10px
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/share.png</normaloff>:/icons/share.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+
+	border:2px solid #000;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: #e6ab5d;;
+    color: white;
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/like.png</normaloff>:/icons/like.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="backward">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: #e6ab5d;
+    color: white;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/backward.png</normaloff>:/icons/backward.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -286,16 +507,25 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <widget class="QPushButton" name="forward">
           <property name="maximumSize">
            <size>
-            <width>100</width>
-            <height>50</height>
+            <width>16777215</width>
+            <height>16777215</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px; /* 设置为宽高的一半 */
+    background-color: #e6ab5d;
+    color: white;
+}</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/new/icon/forward.png</normaloff>:/new/icon/forward.png</iconset>
+            <normaloff>:/icons/forward.png</normaloff>:/icons/forward.png</iconset>
           </property>
           <property name="iconSize">
            <size>
